@@ -123,5 +123,29 @@ footer p{max-width:1200px;margin:0 auto;padding:0 5vw}
   <p>주소 : 경기도 고양시 일산동구 장항동 749 A-505 | 연락처 : <span class="nw">010-5484-2656</span> | 이메일 : <span class="nw">help@valueinsights.co.kr</span></p>
   <p>Copyright © 2026 ValueInsights. All rights reserved.</p>
 </footer>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAtYX3lIji_cVRUazIu5dmEZh6XSBb3lag",
+    authDomain: "valueinsights-a69a3.firebaseapp.com",
+    projectId: "valueinsights-a69a3",
+    storageBucket: "valueinsights-a69a3.firebasestorage.app",
+    messagingSenderId: "1024512409436",
+    appId: "1:1024512409436:web:d53f57f1a4113fd8e28b99",
+    measurementId: "G-DWEKPQ03MD"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </body>
 </html>

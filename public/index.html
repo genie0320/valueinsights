@@ -1,360 +1,89 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ValueInsights — 직접 만들고, 직접 운영합니다</title>
-<meta name="description" content="ValueInsights는 직접 쓰고 운영하는 소프트웨어를 만들고, 그 경험으로 기업의 AI 전환(AX)을 돕습니다. AX 가능성 진단은 무료입니다.">
-<link rel="canonical" href="https://valueinsights.co.kr/">
-<meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="ValueInsights">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:url" content="https://valueinsights.co.kr/">
-<meta property="og:title" content="ValueInsights — 직접 만들고, 직접 운영합니다">
-<meta property="og:description" content="자사 구독 서비스와 기업 AX 전환. AX 가능성 진단은 무료입니다.">
-<meta property="og:image" content="https://valueinsights.co.kr/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"ValueInsights","url":"https://valueinsights.co.kr/","logo":"https://valueinsights.co.kr/apple-touch-icon.png","email":"help@valueinsights.co.kr","telephone":"+82-10-5484-2656","address":{"@type":"PostalAddress","streetAddress":"장항동 749 A-505","addressLocality":"고양시 일산동구","addressRegion":"경기도","addressCountry":"KR"}}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#fafaf7;--fg:#141414;--mute:#706e68;--line:#d9d7d0;--accent:#a31621}
-@media (prefers-color-scheme:dark){:root{--bg:#121211;--fg:#f1efe9;--mute:#8d8a82;--line:#2e2d2a;--accent:#e0505c}}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-*{box-sizing:border-box;margin:0}
-body{background:var(--bg);color:var(--fg);font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
-header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px max(5vw,calc(50% - 600px + 5vw));background:var(--bg);border-bottom:1px solid var(--line);font-size:14px}
-header b{font-weight:900;letter-spacing:-.02em}
-nav{display:flex;gap:28px}
-nav a{color:var(--mute);transition:color .2s}nav a:hover,nav a.cur{color:var(--accent)}
-.page{display:none}.page.on{display:block}
-section{padding:12vh 5vw;max-width:1200px;margin:0 auto}
-.tag{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:700;margin-bottom:28px;display:block;line-height:1.7}
-h1,h2{font-weight:900;letter-spacing:-.04em;line-height:1.25}
-h1{font-size:clamp(34px,6.4vw,76px)}
-h1 span{color:var(--mute);font-weight:300}
-h1.s,h2{font-size:clamp(26px,4vw,48px)}
-h3,.svc h2{font-weight:900;letter-spacing:-.03em;line-height:1.35;font-size:clamp(22px,3vw,34px)}
-em{font-style:normal;color:var(--accent)}
-.lead{margin-top:32px;color:var(--mute);font-size:clamp(15px,1.6vw,18px);max-width:620px}
-.sm{color:var(--mute);font-size:15px;max-width:640px;margin-top:12px}
-.btns{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap}
-.btn{border:1px solid var(--fg);padding:13px 24px;font-size:14px;font-weight:700;transition:.2s}
-.btn:hover,.btn.on{background:var(--fg);color:var(--bg)}
-.btn.on:hover{background:var(--accent);border-color:var(--accent)}
-.go{display:inline-block;margin-top:32px;font-size:14px;font-weight:700;border-bottom:1px solid var(--fg);padding-bottom:2px;transition:color .2s,border-color .2s}
-.go:hover{color:var(--accent);border-color:var(--accent)}
-.row{padding:44px 0;border-top:1px solid var(--line)}
-.row small{display:block;color:var(--mute);font-size:15px;font-weight:300;margin-bottom:6px}
-.end{border-top:1px solid var(--line)}
-.idx{display:grid;grid-template-columns:60px 1fr auto;gap:8px 20px;align-items:baseline;padding:30px 0;border-top:1px solid var(--line);transition:color .2s}
-.idx:hover{color:var(--accent)}
-.idx .n{font-size:14px;color:var(--mute)}
-.idx h3{font-size:clamp(20px,2.6vw,30px)}
-.idx p{grid-column:2;color:var(--mute);font-size:15px}
-.st{display:inline-block;margin-left:10px;font-size:12px;font-weight:700;color:var(--accent);border:1px solid var(--accent);padding:1px 9px;vertical-align:middle;letter-spacing:0}
-.svc{padding:64px 0;border-top:1px solid var(--line)}
-.svc .n{font-size:14px;color:var(--mute);margin-bottom:10px;display:block}
-.q{font-size:clamp(18px,2.2vw,24px);font-weight:300;line-height:1.55;margin-top:20px;max-width:680px}
-.chk{margin-top:36px;list-style:none;padding:0;max-width:680px}
-.chk li{display:grid;grid-template-columns:28px 1fr;padding:14px 0;border-top:1px solid var(--line);font-size:16px}
-.chk li:before{content:"✓";color:var(--accent);font-weight:700}
-.chk li span{color:var(--mute);font-size:14px;display:block}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);margin-top:36px;border-top:1px solid var(--line)}
-.cols>div{padding:24px 24px 24px 0}
-.cols>div+div{padding-left:24px;border-left:1px solid var(--line)}
-.cols b{display:block;font-size:20px;font-weight:900;margin-bottom:6px}
-.cols span{font-size:14px;color:var(--mute)}
-.flow{margin-top:8px;font-size:14px;color:var(--mute)}
-.ba{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1px solid var(--line)}
-.ba>div{padding:24px 24px 24px 0}
-.ba>div+div{padding-left:24px;border-left:1px solid var(--line)}
-.ba h4{font-size:13px;letter-spacing:.08em;color:var(--mute);margin-bottom:12px}
-.ba>div+div h4{color:var(--accent)}
-.ba p{font-size:15px;padding:6px 0}
-.lv{display:grid;grid-template-columns:90px 1fr 190px;gap:8px 24px;padding:28px 0;border-top:1px solid var(--line);align-items:baseline}
-.lv i{font-style:normal;font-size:14px;color:var(--mute)}
-.lv b{font-size:clamp(18px,2.2vw,24px);font-weight:900}
-.lv p{grid-column:2;color:var(--mute);font-size:14px;margin-top:-4px}
-.lv .pr{text-align:right;font-weight:900;font-size:clamp(16px,1.8vw,20px);grid-row:1;grid-column:3}
-.lv .pr small{display:block;font-weight:300;font-size:12px;color:var(--mute)}
-.note{font-size:12px;color:var(--mute);margin-top:24px;max-width:640px}
-.cta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:56px}
-.cta a{padding:40px 0;font-size:clamp(20px,2.6vw,32px);font-weight:900;letter-spacing:-.02em;display:flex;justify-content:space-between;gap:16px;transition:color .2s}
-.cta a:hover{color:var(--accent)}
-.cta small{display:block;font-size:14px;color:var(--mute);font-weight:300;margin-bottom:6px}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:56px}
-.steps div{padding:28px 20px;border-right:1px solid var(--line)}
-.steps div:first-child{padding-left:0}.steps div:last-child{border-right:0}
-.steps b{display:block;font-size:20px;font-weight:900;margin:6px 0}
-.steps span{font-size:13px;color:var(--mute)}.steps i{font-style:normal;font-size:13px;color:var(--accent)}
-.info{display:grid;grid-template-columns:140px 1fr;border-top:1px solid var(--line);padding:22px 0;font-size:15px;gap:12px}
-.info span:first-child{color:var(--mute)}
-.co{font-size:clamp(17px,2vw,22px);font-weight:700;line-height:1.9;letter-spacing:-.02em;color:var(--fg)}
-.faq details{border-top:1px solid var(--line);padding:22px 0}
-.faq summary{cursor:pointer;font-weight:700;font-size:clamp(17px,2vw,22px);list-style:none;display:flex;justify-content:space-between;gap:16px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:"+";color:var(--accent)}
-.faq details[open] summary:after{content:"−"}
-.faq details p{margin-top:12px;color:var(--mute);font-size:15px;max-width:640px}
-footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:12px;color:var(--mute);line-height:1.9}
-footer p{max-width:1200px;margin:0 auto;padding:0 5vw}
-footer a{margin-right:16px}
-footer .pv{color:var(--fg);font-weight:700}
-.nw{white-space:nowrap}
-@media(max-width:700px){
-  nav{gap:16px}section{padding:9vh 5vw}
-  .cols,.ba{grid-template-columns:1fr}.cols>div+div,.ba>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
-  .lv{grid-template-columns:1fr}.lv p,.lv .pr{grid-column:1;grid-row:auto;text-align:left}
-  .steps{grid-template-columns:1fr 1fr}.steps div:nth-child(2){border-right:0}.steps div:nth-child(3){padding-left:0;border-top:1px solid var(--line)}.steps div:nth-child(4){border-top:1px solid var(--line)}
-  .info{grid-template-columns:1fr;gap:2px}
-  .idx{grid-template-columns:40px 1fr}.idx .arr{display:none}
-  .q br{display:none}
-}
-@media(max-width:360px){nav{gap:14px}nav a:first-child{display:none}}
-@media(max-width:300px){header{font-size:12px;gap:10px}nav{gap:10px}}
-</style>
-</head>
-<body>
-<header>
-  <a href="#/"><b>ValueInsights</b></a>
-  <nav aria-label="주요 메뉴"><a href="#/" data-r="">Home</a><a href="#/services" data-r="services">Services</a><a href="#/about" data-r="about">About</a><a href="#/contact" data-r="contact">Contact</a></nav>
-</header>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-<main class="page on" id="p-">
-<section style="padding-top:20vh">
-  <span class="tag">Software &amp; AX</span>
-  <h1>직접 만들고,<br>직접 운영합니다.<br><span>그래서 고객의 일도 실제로 돌아가게 만듭니다.</span></h1>
-  <p class="lead">ValueInsights는 우리가 직접 쓰고 운영하는 소프트웨어를 만들고, 그 경험으로 기업의 AI 전환(AX)을 돕습니다.</p>
-  <div class="btns"><a class="btn on" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">무료 AX 진단 신청 ↗</a><a class="btn" href="#/services">서비스 보기</a></div>
-</section>
-<section style="padding-top:0">
-  <h2 class="tag">Services</h2>
-  <div style="margin-top:8px">
-    <a class="idx" href="#/services/startup"><span class="n">01</span><h3>스타트업 필승 패키지</h3><span class="arr">→</span><p>외주 개발 전에 필요한 요구사항 정의부터 진행 관리까지.</p></a>
-    <a class="idx" href="#/services/realestate"><span class="n">02</span><h3>부동산 분석 리포트</h3><span class="arr">→</span><p>경매·숙박업·투자 목적별로 부동산을 찾고, 판단 근거를 정리합니다.</p></a>
-    <a class="idx" href="#/services/rental"><span class="n">03</span><h3>임대관리 원클릭</h3><span class="arr">→</span><p>임대료 확인, 미납 안내, 계약 만료 관리를 한곳에서.</p></a>
-    <a class="idx" href="#/services/ax"><span class="n">04</span><h3>기업 AX 전환</h3><span class="arr">→</span><p>가능성 진단은 무료, 컨설팅은 정해진 가격으로 진행합니다.</p></a>
-    <div class="end"></div>
-  </div>
-</section>
-<section style="padding-top:0">
-  <h2 class="tag">Track record</h2>
-  <p class="co">케이뱅크 · KB캐피탈 · SKT · KT · 삼성SDS · LG&nbsp;CNS · BMW · KOICA 외</p>
-  <p class="sm">대표 박지은이 17년간 함께한 곳 중 일부입니다. ValueInsights 설립 이전, 각 소속 회사에서 수행한 프로젝트입니다.</p>
-  <a class="go" href="#/about/track">함께한 곳 더 보기 →</a>
-</section>
-</main>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/13.0.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/13.0.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/13.0.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-<main class="page" id="p-services" hidden>
-<section style="padding-top:18vh;padding-bottom:4vh">
-  <span class="tag">Services</span>
-  <h1 class="s">자사 서비스 세 가지와<br>기업 AX 전환</h1>
-  <p class="lead">자사 서비스 세 가지는 구독형으로 제공합니다. 기업 AX 전환은 상담을 거쳐 회사마다 맞춰 진행합니다.</p>
-</section>
-
-<section style="padding-top:0;padding-bottom:0">
-  <div class="svc" id="startup">
-    <span class="n">01 · 자사 서비스 <span class="st">구독</span></span>
-    <h2>스타트업 필승 패키지</h2>
-    <p class="q">세 곳에서 받은 견적이 세 배까지 차이 난다면,<br>견적보다 <em>요구사항</em>부터 다시 보셔야 합니다.</p>
-    <p class="sm">IT를 잘 모르는 대표님도 아이디어만 들고 개발을 시작하지 않도록, 요구사항 정의부터 진행 관리까지 한 번에 제공합니다.</p>
-    <ul class="chk">
-      <li><div>요구사항 정의서<span>AI와 문답하며 아이디어를 구체화하고, 빠진 기능과 앞뒤가 맞지 않는 부분을 점검</span></div></li>
-      <li><div>견적 요청용 문서 (XLSX / PDF)<span>어느 개발사에 보내도 같은 기준으로 견적을 받을 수 있는 형식</span></div></li>
-      <li><div>프로젝트 관리 툴<span>일정, 이슈, 변경 이력을 한곳에서</span></div></li>
-      <li><div>범위 변경 이력<span>"원래 있던 기능인지, 추가된 기능인지"를 기록으로 가림</span></div></li>
-    </ul>
-    <a class="go" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">이용 문의하기 ↗</a>
-  </div>
-
-  <div class="svc" id="realestate">
-    <span class="n">02 · 자사 서비스 <span class="st">구독</span></span>
-    <h2>부동산 분석 리포트</h2>
-    <p class="q">같은 건물도 목적에 따라 <em>가치</em>가 다릅니다.</p>
-    <p class="sm">목적에 맞는 부동산을 찾고, 투자 판단에 필요한 근거를 리포트로 정리해 드립니다.</p>
-    <div class="cols">
-      <div><b>경매</b><span>권리관계, 유사 낙찰 사례, 명도·수리 비용까지 반영한 입찰 검토</span></div>
-      <div><b>숙박업 개설</b><span>입지, 용도·인허가 가능성, 예상 운영 수익으로 본 적합도</span></div>
-      <div><b>일반 투자</b><span>임대 수익, 시세 흐름, 보유 비용과 출구 시나리오</span></div>
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
-    <p class="flow">발굴 → 분석 → 리포트 → 상담</p>
-    <p class="note">본 리포트는 투자 판단에 참고할 정보와 근거를 제공하며, 「감정평가 및 감정평가사에 관한 법률」에 따른 감정평가가 아닙니다. 투자 결과를 보장하지 않으며, 최종 투자 판단과 책임은 투자자 본인에게 있습니다.</p>
-    <a class="go" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">이용 문의하기 ↗</a>
-  </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-  <div class="svc" id="rental">
-    <span class="n">03 · 자사 서비스 <span class="st">구독</span></span>
-    <h2>임대관리 원클릭</h2>
-    <p class="q">건물주가 모두 관리 전문가는 아닙니다.<br>그래도 <em>관리</em>는 해야 합니다.</p>
-    <div class="ba">
-      <div><h4>BEFORE</h4><p>임대료 입금을 엑셀과 통장 앱을 오가며 확인</p><p>독촉 연락은 직접, 카톡으로</p><p>계약 만료일을 놓쳐 공실 발생</p><p>하자 연락이 전화·문자로 흩어짐</p></div>
-      <div><h4>AFTER</h4><p>임대료 청구와 입금 확인을 한 화면에서</p><p>미납 안내는 자동으로</p><p>만료 전 알림과 갱신 일정 관리</p><p>하자 접수를 한곳으로 모으고 처리 이력까지</p></div>
-    </div>
-    <a class="go" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">이용 문의하기 ↗</a>
-  </div>
-</section>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-<section style="padding-bottom:6vh" id="ax">
-  <span class="tag">04 · 기업 AX 전환</span>
-  <h2>우리 회사는 AX의 어디쯤일까요?</h2>
-  <p class="lead">금융·통신·부동산 등 여러 산업에서 17년간 서비스를 기획해 온 대표가 직접 진단합니다. 회사에 맞는 도입 범위를 정하고, 도입한 뒤에도 계속 손봅니다.</p>
-  <div style="margin-top:56px">
-    <div class="lv"><i>STEP 1</i><b>AX 가능성 진단</b><div class="pr">무료</div><p>업무와 데이터를 살펴보고, 지금 적용할 수 있는 AX 단계를 알려 드립니다.</p></div>
-    <div class="lv"><i>STEP 2</i><b>컨설팅</b><div class="pr">1,000만원<small>6주 · VAT 별도</small></div><p>우선순위, 도입 범위, 예상 효과를 담은 AX 로드맵을 만듭니다.</p></div>
-    <div class="lv"><i>STEP 3</i><b>AX 설계·도입</b><div class="pr">상담 후 결정<small>범위와 방식에 따라</small></div><p>로드맵에 맞춰 필요한 도구를 설계하고 실제 업무에 붙입니다.</p></div>
-    <div class="lv"><i>STEP 4</i><b>운영 관리</b><div class="pr">상담 후 결정</div><p>사업이 커지는 속도에 맞춰 계속 점검하고 고칩니다.</p></div>
-    <div class="end"></div>
-  </div>
-  <a class="go" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">무료 진단 신청하기 ↗</a>
-</section>
-</main>
-
-<main class="page" id="p-about" hidden>
-<section style="padding-top:18vh">
-  <span class="tag">About</span>
-  <h1>가치를 읽고,<br>쓰이는 것으로<br>만듭니다.</h1>
-  <p class="lead">좋은 아이디어도 <em>'조금'</em> 모자란 데서 멈추는 경우가 많습니다. 우리는 서비스를 직접 만들고 운영하면서 그 <em>'작은'</em> 틈을 메우는 법을 익혔습니다. 이제 그 경험으로 더 많은 아이디어가 고객을 만나도록 돕습니다.</p>
-</section>
-
-<section style="padding-top:0">
-  <span class="tag">Principles</span>
-  <h2>우리는 이래라저래라 말만 하고 떠나지 않습니다.</h2>
-  <div style="margin-top:56px">
-    <div class="row"><small>보고서로 끝나는 AI 도입을 싫어합니다.</small><h3>쓰이는 도구를 <em>만듭니다.</em></h3></div>
-    <div class="row"><small>시연에서만 멋진 데모를 싫어합니다.</small><h3>현업에서 <em>돌아가는 것만</em> 남깁니다.</h3></div>
-    <div class="row"><small>만들고 넘기면 끝이라고 생각하지 않습니다.</small><h3>우리가 먼저 <em>운영해 보고</em> 권합니다.</h3></div>
-    <div class="row"><small>모호한 요구는 모호한 결과를 낳습니다.</small><h3>해야 할 일을 <em>정확하게</em> 정의합니다.</h3></div>
-    <div class="end"></div>
-  </div>
-</section>
-
-<section style="padding-top:0">
-  <span class="tag">How we work</span>
-  <h2>이렇게 일합니다</h2>
-  <div class="steps">
-    <div><i>01</i><b>정의</b><span>문제와 범위를 먼저 못 박습니다.</span></div>
-    <div><i>02</i><b>설계</b><span>구조와 기준을 정합니다.</span></div>
-    <div><i>03</i><b>구축</b><span>현장에서 쓸 수 있는 형태로 만듭니다.</span></div>
-    <div><i>04</i><b>운영</b><span>쓰이면서 계속 고칩니다.</span></div>
-  </div>
-</section>
-
-<section style="padding-top:0">
-  <span class="tag">People</span>
-  <h2>여러 산업 현장을 거쳐 온<br>두 사람이 이끕니다</h2>
-  <div style="margin-top:48px">
-    <div class="info"><span><b style="color:var(--fg)">박지은</b><br>대표</span><span>금융, 헬스케어, 자동차, 부동산 분야에서 17년간 IT 서비스를 기획해 왔습니다.</span></div>
-    <div class="info"><span><b style="color:var(--fg)">이남경</b><br>공동대표</span><span>엔터테인먼트, 커머스, 하이엔드 디바이스 업계에서 15년간 사업을 관리해 왔습니다.</span></div>
-    <div class="end"></div>
-  </div>
-</section>
-
-<section style="padding-top:0" id="track">
-  <span class="tag">Track record</span>
-  <h2>이런 곳들과 일했습니다</h2>
-  <p class="lead">대표 박지은이 17년간 함께한 곳 중 일부입니다.</p>
-  <div style="margin-top:48px">
-    <div class="info"><span>금융</span><span class="co">JB우리금융 · 케이뱅크 · 경남은행 · KB캐피탈 · 서민금융진흥원</span></div>
-    <div class="info"><span>공공</span><span class="co">여성가족부 · KOICA</span></div>
-    <div class="info"><span>통신 · IT</span><span class="co">SKT · KT · SK브로드밴드 · SK&nbsp;C&amp;C · 삼성SDS · LG&nbsp;CNS · 롯데정보통신</span></div>
-    <div class="info"><span>모빌리티 · 커머스</span><span class="co">BMW · 토탈F&amp;B</span></div>
-    <div class="info"><span>헬스케어 · 교육 · 기타</span><span class="co">바른한약 · 천재교육 · KMF · Kepa</span></div>
-    <div class="end"></div>
-  </div>
-  <p class="note">ValueInsights 설립 이전, 각 소속 회사에서 수행한 프로젝트입니다.</p>
-</section>
-</main>
-
-<main class="page" id="p-contact" hidden>
-<section style="padding-top:18vh;padding-bottom:4vh">
-  <span class="tag">Contact</span>
-  <h1>이야기부터<br>시작합니다.<br><span>AX 가능성 진단은 무료입니다.</span></h1>
-  <div class="btns"><a class="btn on" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">상담 문의하기 ↗</a></div>
-</section>
-
-<section style="padding-top:6vh;padding-bottom:4vh">
-  <span class="tag">Process</span>
-  <h2>문의하시면, 이렇게 진행됩니다.</h2>
-  <div class="steps">
-    <div><i>01</i><b>접수</b><span>영업일 기준 1일 이내에 회신드립니다.</span></div>
-    <div><i>02</i><b>사전 파악</b><span>신청 내용을 바탕으로 귀사의 업무와 업종을 먼저 살펴봅니다.</span></div>
-    <div><i>03</i><b>무료 진단</b><span>첫 미팅에서 해결하려는 문제부터 듣고, 현재 AX 단계를 진단합니다.</span></div>
-    <div><i>04</i><b>제안</b><span>컨설팅이나 설계가 필요하다면 범위와 비용을 함께 정합니다.</span></div>
-  </div>
-</section>
-
-<section style="padding-top:6vh;padding-bottom:4vh">
-  <span class="tag">Form</span>
-  <h2>신청서에는 이런 내용을 적어 주세요.</h2>
-  <div style="margin-top:48px">
-    <div class="info"><span>성함 / 회사명</span><span>연락드릴 분과 회사를 알려 주세요.</span></div>
-    <div class="info"><span>연락처 · 이메일</span><span>회신받으실 방법을 남겨 주세요.</span></div>
-    <div class="info"><span>문의 목적</span><span>AX 가능성 진단 신청 · 컨설팅 / 설계 문의 · 구독 서비스 이용 문의 · 기타</span></div>
-    <div class="info"><span>프로젝트 소개</span><span>업종과 지금 겪는 문제, 도움받고 싶은 부분을 간략히 적어 주세요. 정리되지 않아도 괜찮습니다.</span></div>
-    <div class="end"></div>
-  </div>
-  <div class="cta"><a href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener"><span><small>신청서는 구글폼으로 접수됩니다</small>상담 문의하기</span><span>↗</span></a></div>
-</section>
-
-<section style="padding-top:6vh">
-  <span class="tag">FAQ</span>
-  <h2>자주 묻는 질문</h2>
-  <div class="faq" style="margin-top:48px">
-    <details><summary>AX 가능성 진단은 정말 무료인가요?</summary><p>네, 무료입니다. 이후 컨설팅은 6주 기준 1,000만원(VAT 별도)이고, 설계·도입은 범위와 방식에 따라 상담 후 정합니다.</p></details>
-    <details><summary>진단만 받고 끝내도 되나요?</summary><p>그렇게 하셔도 됩니다. 진단 결과를 보고 다음 단계를 결정하시면 됩니다.</p></details>
-    <details><summary>IT 담당자가 따로 없어도 되나요?</summary><p>괜찮습니다. 업무를 가장 잘 아시는 분과 이야기하면서 시작합니다.</p></details>
-    <details><summary>어떤 업종을 다루나요?</summary><p>금융, 통신, 공공, 부동산, 커머스 분야 경험이 있습니다. 그 외 업종도 문의해 주시면 가능 여부를 말씀드립니다.</p></details>
-    <details><summary>구독 서비스는 어떻게 이용하나요?</summary><p>신청서에서 '구독 서비스 이용 문의'를 선택해 남겨 주시면, 이용 방법과 요금을 안내해 드립니다.</p></details>
-    <details><summary>비밀유지는 어떻게 하나요?</summary><p>원하시면 첫 미팅 전에 비밀유지계약(NDA)을 먼저 맺고 시작합니다.</p></details>
-    <div class="end"></div>
-  </div>
-</section>
-</main>
-
-<section id="contact-band" style="padding-top:4vh">
-  <span class="tag">Contact</span>
-  <h2>AI를 어디에 써야 할지 막막하다면,<br>이야기부터 나눠 보세요.</h2>
-  <div class="cta"><a href="#/contact"><span><small>AX 가능성 진단은 무료입니다</small>상담 문의하기</span><span>→</span></a></div>
-</section>
-
-<footer>
-  <p><a class="pv" href="privacy.html">개인정보처리방침</a></p>
-  <p>상호명 : ValueInsights | 대표자 : 박지은 | 사업자등록번호 : <span class="nw">891-09-01150</span></p>
-  <p>주소 : 경기도 고양시 일산동구 장항동 749 A-505 | 연락처 : <a class="nw" href="tel:01054842656" style="margin:0">010-5484-2656</a> | 이메일 : <a class="nw" href="mailto:help@valueinsights.co.kr" style="margin:0">help@valueinsights.co.kr</a></p>
-  <p>Copyright © 2026 ValueInsights. All rights reserved.</p>
-</footer>
-
-<script>
-(function(){
-  var pages=['','services','about','contact'];
-  var titles={'':'ValueInsights — 직접 만들고, 직접 운영합니다',services:'서비스 | ValueInsights',about:'회사 소개 | ValueInsights',contact:'문의 | ValueInsights'};
-  function route(){
-    var parts=location.hash.replace(/^#\/?/,'').split('/'),r=parts[0],t=parts[1];
-    if(pages.indexOf(r)<0)r='';
-    pages.forEach(function(p){var el=document.getElementById('p-'+p),on=p===r;el.classList.toggle('on',on);el.hidden=!on});
-    document.getElementById('contact-band').hidden=(r==='contact');
-    document.querySelectorAll('nav a').forEach(function(a){
-      var cur=a.getAttribute('data-r')===r;a.classList.toggle('cur',cur);
-      if(cur)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
-    });
-    document.title=titles[r];
-    var target=t&&document.getElementById(t);
-    if(target)target.scrollIntoView({behavior:'instant',block:'start'});
-    else window.scrollTo({top:0,behavior:'instant'});
-  }
-  window.addEventListener('hashchange',route);route();
-})();
-</script>
-</body>
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
 </html>
