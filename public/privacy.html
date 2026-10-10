@@ -60,9 +60,9 @@ footer p{max-width:1200px;margin:0 auto;padding:0 5vw}
 
     <h2>2. 처리하는 개인정보 항목 및 수집 방법</h2>
     <ul>
-      <li>필수 항목: 성명, 회사명, 연락처, 이메일</li>
+      <li>필수 항목: 성명, 회사명, 연락처(전화번호), 이메일</li>
       <li>선택 항목: 문의 목적, 프로젝트 소개 내용</li>
-      <li>수집 방법: 홈페이지에 연결된 상담 신청서(구글 설문지), 이메일, 전화</li>
+      <li>수집 방법: 홈페이지에 연결된 상담 예약 페이지(Google 캘린더), 상담 신청서(구글 설문지), 이메일, 전화</li>
     </ul>
 
     <h2>3. 개인정보의 보유 및 이용 기간</h2>
@@ -72,16 +72,16 @@ footer p{max-width:1200px;margin:0 auto;padding:0 5vw}
     <p>회사는 정보주체의 동의 또는 법령의 근거 없이 개인정보를 제3자에게 제공하지 않습니다.</p>
 
     <h2>5. 개인정보 처리업무의 위탁 및 국외 이전</h2>
-    <p>회사는 상담 신청서 접수를 위해 Google의 설문 서비스를 이용하며, 이 과정에서 개인정보가 국외로 이전됩니다.</p>
+    <p>회사는 상담 예약과 신청서 접수를 위해 Google의 캘린더·설문 서비스를 이용하며, 이 과정에서 개인정보가 국외로 이전됩니다.</p>
     <table>
       <tr><th>이전받는 자</th><td>Google LLC (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA)</td></tr>
       <tr><th>이전 국가</th><td>미국 등 Google 데이터센터 소재 국가</td></tr>
-      <tr><th>이전 일시 및 방법</th><td>신청서 제출 시 네트워크를 통해 전송</td></tr>
+      <tr><th>이전 일시 및 방법</th><td>예약 또는 신청서 제출 시 네트워크를 통해 전송</td></tr>
       <tr><th>이전 항목</th><td>제2조의 수집 항목</td></tr>
-      <tr><th>이용 목적</th><td>상담 신청서 접수 및 보관</td></tr>
+      <tr><th>이용 목적</th><td>상담 예약 및 신청서 접수·보관</td></tr>
       <tr><th>보유 기간</th><td>제3조의 보유 기간과 같음</td></tr>
     </table>
-    <p style="margin-top:10px">국외 이전을 원하지 않으시면 신청서 대신 이메일이나 전화로 문의하실 수 있습니다.</p>
+    <p style="margin-top:10px">국외 이전을 원하지 않으시면 예약 페이지나 신청서 대신 이메일이나 전화로 문의하실 수 있습니다.</p>
 
     <h2>6. 개인정보의 파기 절차 및 방법</h2>
     <p>보유 기간이 지나거나 처리 목적이 달성된 개인정보는 지체 없이 파기합니다. 전자 파일은 복구할 수 없는 방법으로 삭제하고, 출력물은 분쇄하거나 소각합니다.</p>
@@ -123,29 +123,5 @@ footer p{max-width:1200px;margin:0 auto;padding:0 5vw}
   <p>주소 : 경기도 고양시 일산동구 장항동 749 A-505 | 연락처 : <span class="nw">010-5484-2656</span> | 이메일 : <span class="nw">help@valueinsights.co.kr</span></p>
   <p>Copyright © 2026 ValueInsights. All rights reserved.</p>
 </footer>
-
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyAtYX3lIji_cVRUazIu5dmEZh6XSBb3lag",
-    authDomain: "valueinsights-a69a3.firebaseapp.com",
-    projectId: "valueinsights-a69a3",
-    storageBucket: "valueinsights-a69a3.firebasestorage.app",
-    messagingSenderId: "1024512409436",
-    appId: "1:1024512409436:web:d53f57f1a4113fd8e28b99",
-    measurementId: "G-DWEKPQ03MD"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
 </body>
 </html>
