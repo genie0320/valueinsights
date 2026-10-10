@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ValueInsights — 직접 만들고, 직접 운영합니다.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafaf7;--fg:#141414;--mute:#77756f;--line:#d9d7d0;--accent:#a31621;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121211;--fg:#f1efe9;--mute:#8d8a82;--line:#2e2d2a;--accent:#e0505c}}
+:root[data-theme="dark"]{--bg:#121211;--fg:#f1efe9;--mute:#8d8a82;--line:#2e2d2a;--accent:#e0505c}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.7;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:20px 5vw;background:var(--bg);border-bottom:1px solid var(--line);font-size:14px}
+header b{font-weight:900;letter-spacing:-.02em}
+nav{display:flex;gap:28px}
+nav a{color:var(--mute);transition:color .2s}nav a:hover,nav a.cur{color:var(--accent)}
+.page{display:none}.page.on{display:block}
+section{padding:12vh 5vw;max-width:1200px;margin:0 auto}
+.tag{font-size:13px;letter-spacing:.08em;color:var(--accent);font-weight:700;margin-bottom:28px;display:block}
+h1,h2{font-weight:900;letter-spacing:-.04em;line-height:1.25}
+h1{font-size:clamp(34px,6.4vw,76px)}
+h1 span{color:var(--mute);font-weight:300}
+h2{font-size:clamp(26px,4vw,48px)}
+h3{font-weight:900;letter-spacing:-.03em;line-height:1.35;font-size:clamp(22px,3vw,34px)}
+em{font-style:normal;color:var(--accent)}
+.lead{margin-top:32px;color:var(--mute);font-size:clamp(15px,1.6vw,18px);max-width:620px}
+.sm{color:var(--mute);font-size:15px;max-width:640px;margin-top:12px}
+.btns{display:flex;gap:12px;margin-top:44px;flex-wrap:wrap}
+.btn{border:1px solid var(--fg);padding:13px 24px;font-size:14px;font-weight:700;transition:.2s}
+.btn:hover,.btn.on{background:var(--fg);color:var(--bg)}
+.row{padding:44px 0;border-top:1px solid var(--line)}
+.row small{display:block;color:var(--mute);font-size:15px;font-weight:300;margin-bottom:6px}
+.end{border-top:1px solid var(--line)}
+.idx{display:grid;grid-template-columns:60px 1fr auto;gap:8px 20px;align-items:baseline;padding:30px 0;border-top:1px solid var(--line);transition:color .2s}
+.idx:hover{color:var(--accent)}
+.idx .n{font-size:14px;color:var(--mute)}
+.idx h3{font-size:clamp(20px,2.6vw,30px)}
+.idx p{grid-column:2;color:var(--mute);font-size:15px}
+.st{display:inline-block;margin-left:10px;font-size:12px;font-weight:700;color:var(--accent);border:1px solid var(--accent);padding:1px 9px;vertical-align:middle;letter-spacing:0}
+.st.plan{color:var(--mute);border-color:var(--line)}
+.svc{padding:64px 0;border-top:1px solid var(--line)}
+.svc .n{font-size:14px;color:var(--mute);margin-bottom:10px;display:block}
+.q{font-size:clamp(18px,2.2vw,24px);font-weight:300;line-height:1.55;margin-top:20px;max-width:680px}
+.chk{margin-top:36px;list-style:none;padding:0;max-width:680px}
+.chk li{display:grid;grid-template-columns:28px 1fr;padding:14px 0;border-top:1px solid var(--line);font-size:16px}
+.chk li:before{content:"□";color:var(--accent)}
+.chk li span{color:var(--mute);font-size:14px;display:block}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);margin-top:36px;border-top:1px solid var(--line)}
+.cols>div{padding:24px 24px 24px 0}
+.cols>div+div{padding-left:24px;border-left:1px solid var(--line)}
+.cols b{display:block;font-size:20px;font-weight:900;margin-bottom:6px}
+.cols span{font-size:14px;color:var(--mute)}
+.flow{margin-top:8px;font-size:14px;color:var(--mute)}
+.ba{display:grid;grid-template-columns:1fr 1fr;margin-top:36px;border-top:1px solid var(--line)}
+.ba>div{padding:24px 24px 24px 0}
+.ba>div+div{padding-left:24px;border-left:1px solid var(--line)}
+.ba h4{font-size:13px;letter-spacing:.08em;color:var(--mute);margin-bottom:12px}
+.ba>div+div h4{color:var(--accent)}
+.ba p{font-size:15px;padding:6px 0}
+.lv{display:grid;grid-template-columns:90px 1fr 190px;gap:8px 24px;padding:28px 0;border-top:1px solid var(--line);align-items:baseline}
+.lv i{font-style:normal;font-size:14px;color:var(--mute)}
+.lv b{font-size:clamp(18px,2.2vw,24px);font-weight:900}
+.lv p{grid-column:2;color:var(--mute);font-size:14px;margin-top:-4px}
+.lv .pr{text-align:right;font-weight:900;font-size:clamp(16px,1.8vw,20px);grid-row:1;grid-column:3}
+.lv .pr small{display:block;font-weight:300;font-size:12px;color:var(--mute)}
+.note{font-size:12px;color:var(--mute);margin-top:24px;max-width:640px}
+.cta{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:56px}
+.cta a{padding:40px 0;font-size:clamp(20px,2.6vw,32px);font-weight:900;letter-spacing:-.02em;display:flex;justify-content:space-between;gap:16px;transition:color .2s}
+.cta a:hover{color:var(--accent)}
+.cta small{display:block;font-size:14px;color:var(--mute);font-weight:300;margin-bottom:6px}
+.ph{border-bottom:1px dashed var(--accent);color:var(--accent)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:56px}
+.steps div{padding:28px 20px;border-right:1px solid var(--line)}
+.steps div:first-child{padding-left:0}.steps div:last-child{border-right:0}
+.steps b{display:block;font-size:20px;font-weight:900;margin:6px 0}
+.steps span{font-size:13px;color:var(--mute)}.steps i{font-style:normal;font-size:13px;color:var(--accent)}
+.info{display:grid;grid-template-columns:140px 1fr;border-top:1px solid var(--line);padding:22px 0;font-size:15px;gap:12px}
+.info span:first-child{color:var(--mute)}
+footer{border-top:1px solid var(--line);padding:36px 5vw 48px;font-size:12px;color:var(--mute);line-height:1.9}
+footer p{max-width:1200px;margin:0 auto}
+footer a{margin-right:16px}
+@media(max-width:700px){nav{gap:16px}section{padding:9vh 5vw}.cols,.ba{grid-template-columns:1fr}.cols>div+div,.ba>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}.lv{grid-template-columns:1fr}.lv p,.lv .pr{grid-column:1;grid-row:auto;text-align:left}.steps{grid-template-columns:1fr 1fr}.steps div:nth-child(2){border-right:0}.steps div:nth-child(3){padding-left:0;border-top:1px solid var(--line)}.steps div:nth-child(4){border-top:1px solid var(--line)}.info{grid-template-columns:1fr;gap:2px}.idx{grid-template-columns:40px 1fr}.idx>span:last-child{display:none}}
+.faq details{border-top:1px solid var(--line);padding:22px 0}.faq summary{cursor:pointer;font-weight:700;font-size:clamp(17px,2vw,22px);list-style:none;display:flex;justify-content:space-between;gap:16px}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";color:var(--accent)}.faq details[open] summary:after{content:"−"}.faq details p{margin-top:12px;color:var(--mute);font-size:15px;max-width:640px}
+.pj{display:grid;grid-template-columns:130px 1fr 190px;gap:6px 24px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}.pj i{font-style:normal;font-size:13px;color:var(--mute)}.pj b{font-weight:700;font-size:clamp(16px,1.8vw,19px)}.pj p{grid-column:2;font-size:13px;color:var(--mute);margin-top:-2px}.pj span{font-size:14px;color:var(--mute);text-align:right;grid-row:1;grid-column:3}.more summary{cursor:pointer;padding:22px 0;border-top:1px solid var(--line);font-weight:700;list-style:none;color:var(--accent)}.more summary::-webkit-details-marker{display:none}
+@media(max-width:700px){.pj{grid-template-columns:1fr}.pj p,.pj span{grid-column:1;grid-row:auto;text-align:left}}
+.co{font-size:clamp(17px,2vw,22px);font-weight:700;line-height:1.9;letter-spacing:-.02em;color:var(--fg)}
+</style>
+</head>
+<body>
+<header>
+  <a href="#/"><b>ValueInsights</b></a>
+  <nav><a href="#/" data-r="">Home</a><a href="#/about" data-r="about">About</a><a href="#/works" data-r="works">Works</a><a href="#/contact" data-r="contact">Contact</a></nav>
+</header>
+
+<!-- ================= HOME : 서비스는 한 줄씩만 ================= -->
+<main class="page on" id="p-">
+<section style="padding-top:20vh">
+  <span class="tag">Software &amp; AX</span>
+  <h1>직접 만들고,<br>직접 운영합니다.<br><span>그래서 남의 일도 작동하게 만듭니다.</span></h1>
+  <p class="lead">ValueInsights는 자사 운영 소프트웨어를 만들고, 다른 회사의 AX(AI 전환)를 돕습니다.</p>
+</section>
+<section style="padding-top:0">
+  <span class="tag">Works</span>
+  <div style="margin-top:8px">
+    <a class="idx" href="#/works"><span class="n">01</span><h3>스타트업 필승 패키지</h3><span>→</span><p>요구사항정의서부터 프로젝트 관리 툴까지. 구독 서비스.</p></a>
+    <a class="idx" href="#/works"><span class="n">02</span><h3>부동산 가치평가</h3><span>→</span><p>목적에 맞는 부동산을 찾고, 근거로 판단합니다. 구독 서비스.</p></a>
+    <a class="idx" href="#/works"><span class="n">03</span><h3>임대관리</h3><span>→</span><p>건물주를 위한 원클릭 임차인·부동산 관리. 구독 서비스.</p></a>
+    <a class="idx" href="#/works"><span class="n">04</span><h3>기업 AX 전환</h3><span>→</span><p>진단은 무료. 단계별로 가격을 공개하며, 상담으로 진행합니다.</p></a>
+    <div class="end"></div>
+  </div>
+</section>
+</main>
+
+<!-- ================= WORKS : 서비스 상세는 여기서만 ================= -->
+<main class="page" id="p-works">
+<section style="padding-top:18vh;padding-bottom:4vh">
+  <span class="tag">Works</span>
+  <h2>자사 서비스 세 가지,<br>그리고 기업 AX 전환.</h2>
+  <p class="lead">자사 서비스는 구독으로 공개 오픈할 예정입니다. 상담이 필요한 것은 기업 AX 전환 하나입니다.</p>
+</section>
+
+<section style="padding-top:0;padding-bottom:0">
+  <div class="svc">
+    <span class="n">01 · 자사 서비스 <span class="st plan">구독 · 오픈 예정</span></span>
+    <h3>스타트업을 위한 필승 패키지</h3>
+    <p class="q">견적을 세 곳에서 받았는데 금액이 세 배씩 차이 났다면,<br>문제는 견적이 아니라 <em>요구사항</em>입니다.</p>
+    <p class="sm">IT를 잘 모르는 대표님이 아이디어만으로 프로젝트를 시작하지 않도록, 정의에서 관리까지 한 번에 제공합니다.</p>
+    <ul class="chk">
+      <li><div>요구사항 정의서<span>AI 질문으로 아이디어를 구체화하고, 누락·모순을 점검</span></div></li>
+      <li><div>견적 요청용 문서 (XLSX / PDF)<span>개발사 어디에 보내도 같은 기준으로 견적을 받을 수 있는 형식</span></div></li>
+      <li><div>프로젝트 관리 툴<span>일정, 이슈, 변경 이력을 한 곳에서</span></div></li>
+      <li><div>범위 변경 이력<span>"원래 있던 기능인지, 추가된 기능인지"를 기록으로 가림</span></div></li>
+    </ul>
+  </div>
+
+  <div class="svc">
+    <span class="n">02 · 자사 서비스 <span class="st plan">구독 · 오픈 예정</span></span>
+    <h3>부동산 가치평가</h3>
+    <p class="q">같은 건물도 목적에 따라 <em>가치</em>가 다릅니다.</p>
+    <p class="sm">목적에 맞는 부동산을 발굴하고, 투자 판단에 필요한 근거를 정리해 드립니다.</p>
+    <div class="cols">
+      <div><b>경매</b><span>권리관계, 낙찰가 추정, 명도·수리 비용을 반영한 입찰 상한선</span></div>
+      <div><b>숙박업 개설</b><span>입지, 용도·인허가 가능성, 예상 운영 수익 기준의 적합도</span></div>
+      <div><b>일반 투자</b><span>임대 수익, 시세 추이, 보유 비용과 출구 시나리오</span></div>
+    </div>
+    <p class="flow">발굴 → 평가 → 리포트 → 상담</p>
+    <p class="note">본 서비스는 판단에 필요한 정보와 근거를 제공하며, 투자 결과를 보장하지 않습니다. 최종 투자 판단과 책임은 투자자 본인에게 있습니다.</p>
+  </div>
+
+  <div class="svc">
+    <span class="n">03 · 자사 서비스 <span class="st plan">구독 · 오픈 예정</span></span>
+    <h3>임대관리, 원클릭</h3>
+    <p class="q">건물주는 전문 임대인이 아닙니다.<br>그래도 <em>관리</em>는 해야 합니다.</p>
+    <div class="ba">
+      <div><h4>BEFORE</h4><p>임대료 입금을 엑셀과 통장 앱을 오가며 확인</p><p>독촉 연락은 직접, 카톡으로</p><p>계약 만료일을 놓쳐 공실 발생</p><p>하자 연락이 전화·문자로 흩어짐</p></div>
+      <div><h4>AFTER</h4><p>임대료 청구와 입금 확인을 한 화면에서</p><p>미납 안내를 자동으로</p><p>만료 전 알림과 갱신 일정 관리</p><p>하자 접수를 한 곳으로 모아 처리 이력까지</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:0">
+  <span class="tag">04 · 기업 AX 전환</span>
+  <h3 style="font-size:clamp(26px,4vw,48px)">우리 회사는 AX의 어디쯤일까요?</h3>
+  <p class="lead">부동산, 금융, 커머스 등 여러 분야를 경험한 ValueInsights의 핵심 인원이 적용 가능한 AX 단계를 진단하고, 꼭 맞는 서비스를 도입해 사업 성장에 맞춰 꾸준히 관리합니다.</p>
+  <div style="margin-top:56px">
+    <div class="lv"><i>STEP 1</i><b>AX 가능성 진단</b><div class="pr">무료</div><p>업무와 데이터를 살펴 지금 적용 가능한 AX 단계를 알려드립니다.</p></div>
+    <div class="lv"><i>STEP 2</i><b>컨설팅</b><div class="pr">1,000만원<small>1.5개월 · VAT 별도</small></div><p>우선순위, 도입 범위, 예상 효과를 담은 AX 로드맵을 만듭니다.</p></div>
+    <div class="lv"><i>STEP 3</i><b>AX 전환 설계</b><div class="pr">상담 필요<small>진행 단계 및 방식에 따름</small></div><p>로드맵에 맞는 서비스를 설계하고 도입합니다.</p></div>
+    <div class="lv"><i>STEP 4</i><b>매니지먼트</b><div class="pr">상담 필요</div><p>사업이 성장하는 속도에 맞춰 계속 점검하고 개선합니다.</p></div>
+    <div class="end"></div>
+  </div>
+</section>
+</main>
+
+<!-- ================= ABOUT : 사람 · 태도 · 방식만 ================= -->
+<main class="page" id="p-about">
+<section style="padding-top:18vh">
+  <span class="tag">About</span>
+  <h1>가치를 읽고,<br>작동하는 것으로<br>만듭니다.</h1>
+  <p class="lead">많은 아이디어들이 무언가가 <em>'조금'</em> 부족해서 빛을 보지 못하고 사라집니다. 우리는 서비스를 직접 만들면서 그 <em>'작은'</em> 틈을 메꾸는 방법을 찾았습니다. 디지털 세상을 풍성하게 만들 수 있는 더 많은 아이디어들이 고객과 만날 수 있도록 돕겠습니다.</p>
+</section>
+
+<section style="padding-top:0">
+  <span class="tag">Principles</span>
+  <h2>우리는 이래라저래라 말만 하고 떠나지 않습니다.</h2>
+  <div style="margin-top:56px">
+    <div class="row"><small>보고서로 끝나는 AI 도입을 싫어합니다.</small><h3>쓰이는 도구를 <em>만듭니다.</em></h3></div>
+    <div class="row"><small>시연에서만 멋진 데모를 싫어합니다.</small><h3>실제 업무에서 <em>작동하는 것만</em> 남깁니다.</h3></div>
+    <div class="row"><small>만들고 넘기면 끝이라고 생각하지 않습니다.</small><h3>우리가 먼저 <em>운영해 보고</em> 권합니다.</h3></div>
+    <div class="row"><small>모호한 요구는 모호한 결과를 낳습니다.</small><h3>해야 할 일을 <em>정확하게</em> 정의합니다.</h3></div>
+    <div class="end"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <span class="tag">How we work</span>
+  <h2>일하는 순서.</h2>
+  <div class="steps">
+    <div><i>01</i><b>정의</b><span>문제와 범위를 먼저 못 박습니다.</span></div>
+    <div><i>02</i><b>설계</b><span>구조와 기준을 정합니다.</span></div>
+    <div><i>03</i><b>구축</b><span>현장에서 쓸 수 있는 형태로 만듭니다.</span></div>
+    <div><i>04</i><b>운영</b><span>쓰이면서 계속 고칩니다.</span></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <span class="tag">People</span>
+  <h2>여러 산업의 현장에서<br>일해 온 사람들.</h2>
+  <div style="margin-top:48px">
+    <div class="info"><span><b style="color:var(--fg)">박지은</b><br>대표</span><span>금융, 헬스케어, 자동차, 부동산 분야에서 17년간 IT 경력을 쌓아 온 전문 서비스 기획자.</span></div>
+    <div class="info"><span><b style="color:var(--fg)">이남경</b><br>공동대표</span><span>엔터테인먼트, 커머스, 하이엔드 디바이스 업계에서 15년간 경력을 쌓아 온 사업관리자.</span></div>
+    <div class="end"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <span class="tag">Track record</span>
+  <h2>함께한 곳들.</h2>
+  <p class="lead">대표 박지은이 17년간 함께한 곳 중 일부입니다.</p>
+  <div style="margin-top:48px">
+    <div class="info"><span>금융</span><span class="co">JB우리금융 · 케이뱅크 · 경남은행 · KB캐피탈 · 서민금융진흥원</span></div>
+    <div class="info"><span>공공</span><span class="co">여성가족부 · KOICA</span></div>
+    <div class="info"><span>통신 · IT</span><span class="co">SKT · KT · SK브로드밴드 · SK C&amp;C · 삼성 SDS · LG CNS · 롯데정보통신</span></div>
+    <div class="info"><span>모빌리티 · 커머스</span><span class="co">BMW · 토탈F&amp;B</span></div>
+    <div class="info"><span>헬스케어 · 교육 · 기타</span><span class="co">바른한약 · 천재교육 · KMF · Kepa</span></div>
+    <div class="end"></div>
+  </div>
+  <p class="note">ValueInsights 설립 이전, 각 소속 회사에서 수행한 프로젝트입니다.</p>
+</section>
+</main>
+
+<!-- ================= CONTACT PAGE ================= -->
+<main class="page" id="p-contact">
+<section style="padding-top:18vh;padding-bottom:4vh">
+  <span class="tag">Contact</span>
+  <h1>이야기부터<br>시작합니다.<br><span>AX 가능성 진단은 무료입니다.</span></h1>
+  <div class="btns"><a class="btn on" href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener">상담 문의하기 ↗</a></div>
+</section>
+
+<section style="padding-top:6vh;padding-bottom:4vh">
+  <span class="tag">Process</span>
+  <h2>문의하시면, 이렇게 진행됩니다.</h2>
+  <div class="steps">
+    <div><i>01</i><b>접수</b><span>영업일 기준 <span class="ph">[1일]</span> 이내에 회신드립니다.</span></div>
+    <div><i>02</i><b>사전 파악</b><span>신청 내용을 바탕으로 귀사의 업무와 업종을 먼저 살펴봅니다.</span></div>
+    <div><i>03</i><b>무료 진단</b><span>첫 미팅에서 해결하려는 문제부터 듣고, 현재 AX 단계를 진단합니다.</span></div>
+    <div><i>04</i><b>제안</b><span>컨설팅이나 설계가 필요하다면 범위와 비용을 함께 정합니다.</span></div>
+  </div>
+</section>
+
+<section style="padding-top:6vh;padding-bottom:4vh">
+  <span class="tag">Form</span>
+  <h2>신청서에는 이런 내용을 적어 주세요.</h2>
+  <div style="margin-top:48px">
+    <div class="info"><span>성함 / 회사명</span><span>연락드릴 분과 회사를 알려 주세요.</span></div>
+    <div class="info"><span>연락처 · 이메일</span><span>회신받으실 방법을 남겨 주세요.</span></div>
+    <div class="info"><span>문의 목적</span><span>AX 가능성 진단 신청 · 컨설팅 / 설계 문의 · 구독 서비스 오픈 알림 · 기타</span></div>
+    <div class="info"><span>프로젝트 소개</span><span>업종과 지금 겪는 문제, 도움받고 싶은 부분을 간략히 적어 주세요. 정리되지 않아도 괜찮습니다.</span></div>
+    <div class="end"></div>
+  </div>
+  <div class="cta"><a href="https://forms.gle/b7zeSE2xyVuEjWZ77" target="_blank" rel="noopener"><span><small>신청서는 구글폼으로 접수됩니다</small>상담 문의하기</span><span>↗</span></a></div>
+</section>
+
+<section style="padding-top:6vh">
+  <span class="tag">FAQ</span>
+  <h2>자주 묻는 질문과<br>명쾌한 대답.</h2>
+  <div class="faq" style="margin-top:48px">
+    <details><summary>AX 가능성 진단은 정말 무료인가요?</summary><p>네, 무료입니다. 이후 컨설팅은 1.5개월 기준 1,000만원(VAT 별도)이고, AX 전환 설계는 진행 단계와 방식에 따라 상담 후 정합니다.</p></details>
+    <details><summary>진단만 받고 끝내도 되나요?</summary><p>그렇게 하셔도 됩니다. 진단 결과를 보고 다음 단계를 결정하시면 됩니다.</p></details>
+    <details><summary>IT 담당자가 따로 없어도 되나요?</summary><p>괜찮습니다. 업무를 가장 잘 아시는 분과 이야기하면서 시작합니다.</p></details>
+    <details><summary>어떤 업종을 다루나요?</summary><p>부동산, 금융, 커머스 분야의 경험이 있습니다. 그 외 업종도 문의해 주시면 가능 여부를 말씀드립니다.</p></details>
+    <details><summary>구독 서비스는 언제 이용할 수 있나요?</summary><p>필승 패키지, 부동산 가치평가, 임대관리는 구독으로 공개 오픈할 예정입니다. <span class="ph">[오픈 일정 확정 시 기재]</span></p></details>
+    <details><summary>비밀유지는 어떻게 하나요?</summary><p><span class="ph">[필요하시면 비밀유지계약(NDA)을 먼저 체결합니다 — 실제 운영 방침에 맞게 수정]</span></p></details>
+    <div class="end"></div>
+  </div>
+</section>
+</main>
+
+<!-- ================= CONTACT BAND : 다른 페이지 하단 ================= -->
+<section id="contact-band" style="padding-top:4vh">
+  <span class="tag">Contact</span>
+  <h2>우리의 일이 궁금해지셨다면,<br>먼저 이야기를 나눠보세요.</h2>
+  <div class="cta"><a href="#/contact"><span><small>기업 AX 전환 상담 · AX 가능성 진단은 무료입니다</small>상담 문의하기</span><span>→</span></a></div>
+</section>
+
+<footer>
+  <p><a href="#">이용약관</a><a href="#">개인정보처리방침</a></p>
+  <p>상호명 : ValueInsights | 대표자 : 박지은 | 사업자등록번호 : 891-09-01150</p>
+  <p>주소 : 경기도 고양시 일산동구 장항동 749 A-505 | 연락처 : <a href="tel:01054842656" style="margin:0">010-5484-2656</a> | 이메일 : <a href="mailto:help@valueinsights.com" style="margin:0">help@valueinsights.com</a></p>
+  <p>Copyright ⓒ 2026 ValueInsights. All rights reserved.</p>
+</footer>
+
+<script>
+(function(){
+  var pages=['','works','about','contact'];
+  function route(){
+    var h=location.hash,r=h.replace(/^#\/?/,'');
+    
+    if(pages.indexOf(r)<0)r='';
+    pages.forEach(function(p){document.getElementById('p-'+p).classList.toggle('on',p===r)});
+    document.getElementById('contact-band').style.display=(r==='contact')?'none':'';mark(r);window.scrollTo(0,0);
+  }
+  function mark(r){document.querySelectorAll('nav a').forEach(function(a){a.classList.toggle('cur',a.getAttribute('data-r')===r)})}
+  window.addEventListener('hashchange',route);route();
+})();
+</script>
+</body>
+</html>
